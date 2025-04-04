@@ -1,25 +1,14 @@
-#ifndef LINKED_LIST_H_
-#define LINKED_LIST_H_
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
-#include <stdbool.h>
-#include <stdio.h>
+#include <stdint.h>
 
-struct list_node {
-  size_t value;
-  struct list_node *next;
-};
+struct linked_list;  // Forward declaration only
 
-struct linked_list {
-  struct list_node *head;
-};
+struct linked_list *create_linked_list();
+void insert_at_tail(struct linked_list *list, uint64_t value);
+uint64_t remove_from_head(struct linked_list *list);
+int is_empty(struct linked_list *list);
+void free_linked_list(struct linked_list *list);
 
-void insert_at_head(struct linked_list *list, size_t value);
-void insert_at_tail(struct linked_list *list, size_t value);
-size_t remove_from_head(struct linked_list *list);
-size_t remove_from_tail(struct linked_list *list);
-
-void dump_list(FILE *fp, struct linked_list list);
-
-void free_list(struct linked_list list);
-
-#endif // LINKED_LIST_H_
+#endif

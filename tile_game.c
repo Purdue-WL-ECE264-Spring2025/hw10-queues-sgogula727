@@ -177,7 +177,19 @@ void move_right(struct game_state *state) {
   state->empty_col--;
   state->num_steps++;
 }
-
+bool is_solved(struct game_state state) {
+  int expected = 1;
+  for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 4; j++) {
+          if (i == 3 && j == 3) {
+              if (state.tiles[i][j] != 0) return false;
+          } else {
+              if (state.tiles[i][j] != expected++) return false;
+          }
+      }
+  }
+  return true;
+}
 
 // Alternate serialize and deserialize implementation using only 45 bits (half as fast though)
 // static const uint64_t translator[16] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600, 6227020800, 87178291200, 1307674368000};

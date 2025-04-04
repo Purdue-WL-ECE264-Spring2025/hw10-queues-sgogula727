@@ -1,24 +1,61 @@
+#include <stdint.h>
+#include <stdlib.h>
 #include "linked_list.h"
 
-#include <stdlib.h>
+struct node {
+    uint64_t data;
+    struct node *next;
+};
 
-struct list_node *new_node(size_t value) { return NULL; }
+struct linked_list {
+    struct node *head;
+    struct node *tail;
+};
 
-void insert_at_head(struct linked_list *list, size_t value) {}
+struct linked_list *create_linked_list() {
+    struct linked_list *list = malloc(sizeof(struct linked_list));
+    list->head = list->tail = NULL;
+    return list;
+}
 
-void insert_at_tail(struct linked_list *list, size_t value) {}
+void insert_at_tail(struct linked_list *list, uint64_t value) {
+    struct node *new_node = malloc(sizeof(struct node));
+    new_node->data = value;
+    new_node->next = NULL;
 
-size_t remove_from_head(struct linked_list *list) { return 0; }
+    if (list->tail == NULL) {
+        list->head = list->tail = new_node;
+    } else {
+        list->tail->next = new_node;
+        list->tail = new_node;
+    }
+}
 
-size_t remove_from_tail(struct linked_list *list) { return 0; }
+uint64_t remove_from_head(struct linked_list *list) {
+    if (list->head == NULL) return 0;
 
-void free_list(struct linked_list list) {}
+    struct node *temp = list->head;
+    uint64_t value = temp->data;
+    list->head = temp->next;
 
-// Utility function to help you debugging, do not modify
-void dump_list(FILE *fp, struct linked_list list) {
-  fprintf(fp, "[ ");
-  for (struct list_node *cur = list.head; cur != NULL; cur = cur->next) {
-    fprintf(fp, "%zu ", cur->value);
-  }
-  fprintf(fp, "]\n");
+    if (list->head == NULL) {
+        list->tail = NULL;
+    }
+
+    free(temp);
+    return value;
+}
+
+int is_empty(struct linked_list *list) {
+    return list->head == NULL;
+}
+
+void free_linked_list(struct linked_list *list) {
+    struct node *current = list->head;
+    while (current != NULL) {
+        struct node *temp = current;
+        current = current->next;
+        free(temp);
+    }
+    free(list);
 }

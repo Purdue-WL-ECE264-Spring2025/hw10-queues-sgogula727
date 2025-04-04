@@ -2,12 +2,16 @@
 #define TILE_GAME_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 struct game_state {
   uint8_t tiles[4][4];
   uint8_t empty_row, empty_col;
   uint16_t num_steps;
 };
+
+bool is_solved(struct game_state state);
+
 
 uint64_t serialize(struct game_state state);
 struct game_state deserialize(uint64_t state);
