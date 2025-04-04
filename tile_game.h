@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
 struct game_state {
   uint8_t tiles[4][4];
   uint8_t empty_row, empty_col;
