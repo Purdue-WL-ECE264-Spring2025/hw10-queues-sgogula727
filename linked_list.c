@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <stdint.h>
+#include <stdbool.h>
 #include "linked_list.h"
 
 // Node structure definition
@@ -63,41 +65,5 @@ void free_linked_list(struct linked_list *list) {
         free(temp);
     }
     free(list);
-}
 
-    if (list->tail == NULL) {
-        list->head = list->tail = new_node;
-    } else {
-        list->tail->next = new_node;
-        list->tail = new_node;
-    }
-}
-
-uint64_t remove_from_head(struct linked_list *list) {
-    if (list->head == NULL) return 0;
-
-    struct node *temp = list->head;
-    uint64_t value = temp->data;
-    list->head = temp->next;
-
-    if (list->head == NULL) {
-        list->tail = NULL;
-    }
-
-    free(temp);
-    return value;
-}
-
-bool is_empty(struct linked_list *list) {
-    return list->head == NULL;
-}
-
-void free_linked_list(struct linked_list *list) {
-    struct node *current = list->head;
-    while (current != NULL) {
-        struct node *temp = current;
-        current = current->next;
-        free(temp);
-    }
-    free(list);
-}
+  }
