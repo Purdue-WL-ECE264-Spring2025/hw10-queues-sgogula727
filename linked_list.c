@@ -7,10 +7,7 @@ struct node {
     struct node *next;
 };
 
-struct linked_list {
-    struct node *head;
-    struct node *tail;
-};
+
 
 struct linked_list *create_linked_list() {
     struct linked_list *list = malloc(sizeof(struct linked_list));
@@ -18,7 +15,7 @@ struct linked_list *create_linked_list() {
     return list;
 }
 
-void insert_at_tail(struct linked_list *list, uint64_t value) {
+void insert_at_tail(struct linked_list *list, size_t value) {
     struct node *new_node = malloc(sizeof(struct node));
     new_node->data = value;
     new_node->next = NULL;
@@ -46,7 +43,7 @@ uint64_t remove_from_head(struct linked_list *list) {
     return value;
 }
 
-int is_empty(struct linked_list *list) {
+bool is_empty(struct linked_list *list) {
     return list->head == NULL;
 }
 
